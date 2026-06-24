@@ -1,0 +1,343 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+  .heloa-root *{margin:0;padding:0;box-sizing:border-box;}
+  .heloa-root{
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(135deg,#ff2d87 0%,#ff77b7 50%,#ffb3d4 100%);
+    min-height:100vh;
+    color:#fff;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* PARTICLES */
+  .particles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+  .p{position:absolute;border-radius:50%;background:rgba(255,255,255,0.15);animation:rise linear infinite;}
+  @keyframes rise{from{transform:translateY(110vh) scale(0.8);}to{transform:translateY(-120vh) scale(1.2);}}
+
+  /* HERO */
+  .hero{
+    min-height:100vh;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;text-align:center;
+    padding:2rem;position:relative;z-index:1;
+  }
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.35);
+    border-radius:50px;padding:6px 18px;font-size:13px;font-weight:500;
+    letter-spacing:0.08em;margin-bottom:1.5rem;
+    backdrop-filter:blur(10px);
+  }
+  .hero-badge .dot{width:7px;height:7px;border-radius:50%;background:#fff;animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.4);}}
+  .hero h1{
+    font-size:clamp(4.5rem,13vw,10rem);font-weight:800;
+    letter-spacing:0.18em;text-transform:uppercase;
+    text-shadow:0 2px 40px rgba(255,255,255,0.35);
+    animation:fadeUp .8s ease both;
+  }
+  .hero-sub{
+    margin-top:1.2rem;font-size:1.05rem;line-height:1.9;
+    max-width:600px;opacity:.92;animation:fadeUp .9s .15s ease both;
+  }
+  @keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+  .cta-btn{
+    margin-top:2.2rem;padding:.9rem 2.4rem;
+    border:none;border-radius:50px;
+    background:#fff;color:#ff2d87;
+    font-family:'Poppins',sans-serif;font-size:1rem;font-weight:700;
+    cursor:pointer;transition:transform .25s,box-shadow .25s;
+    box-shadow:0 8px 30px rgba(0,0,0,.12);
+    animation:fadeUp 1s .3s ease both;
+  }
+  .cta-btn:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(0,0,0,.18);}
+  .cta-btn:active{transform:translateY(-1px);}
+  .scroll-hint{margin-top:3rem;opacity:.6;font-size:.8rem;animation:bounce 2s infinite;}
+  @keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
+
+  /* MAIN */
+  .main{position:relative;z-index:1;width:min(720px,92%);margin:0 auto;padding-bottom:80px;}
+
+  /* GLASS CARD */
+  .card{
+    background:rgba(255,255,255,0.13);
+    border:1px solid rgba(255,255,255,0.25);
+    border-radius:24px;
+    backdrop-filter:blur(20px);
+    padding:28px 30px;
+    margin:22px 0;
+    transition:transform .3s,box-shadow .3s;
+  }
+  .card:hover{transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,.12);}
+  .card h2{font-size:1.25rem;font-weight:700;margin-bottom:1.1rem;opacity:.95;}
+  .card h2 .emoji{margin-right:8px;}
+
+  /* SOBRE */
+  .tags{display:flex;flex-wrap:wrap;gap:10px;}
+  .tag{
+    background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);
+    border-radius:50px;padding:6px 16px;font-size:.85rem;font-weight:500;
+  }
+
+  /* MENSAGEM */
+  .msg-area{
+    min-height:60px;margin-top:16px;
+    font-size:1.1rem;font-weight:500;text-align:center;
+    opacity:0;transition:opacity .4s;
+  }
+  .msg-area.show{opacity:1;}
+  .reveal-btn{
+    padding:.7rem 1.8rem;border:2px solid rgba(255,255,255,.6);border-radius:50px;
+    background:transparent;color:#fff;font-family:'Poppins',sans-serif;font-size:.9rem;font-weight:600;
+    cursor:pointer;transition:.25s;
+  }
+  .reveal-btn:hover{background:rgba(255,255,255,.2);}
+
+  /* CORAÇÃO */
+  .heart-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;}
+  .heart-btn{
+    width:100px;height:100px;border-radius:50%;
+    background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.4);
+    font-size:2.6rem;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:transform .2s,background .2s;
+    user-select:none;
+  }
+  .heart-btn:hover{transform:scale(1.1);background:rgba(255,255,255,.3);}
+  .heart-btn.pop{animation:heartPop .35s ease;}
+  @keyframes heartPop{0%{transform:scale(1);}50%{transform:scale(1.35);}100%{transform:scale(1);}}
+  .heart-count{font-size:.95rem;opacity:.85;}
+
+  /* CONTADOR */
+  .counter-display{
+    display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  }
+  .counter-num{font-size:3rem;font-weight:800;line-height:1;}
+  .counter-label{font-size:1rem;opacity:.75;}
+  .counter-since{font-size:.82rem;opacity:.6;margin-top:6px;}
+
+  /* CARTA */
+  .carta-section{
+    position:relative;z-index:1;
+    width:min(720px,92%);margin:0 auto 60px;
+  }
+  .env-wrap{display:flex;flex-direction:column;align-items:center;}
+  .envelope{
+    width:340px;height:230px;position:relative;
+    perspective:1000px;margin:30px auto;cursor:pointer;
+  }
+  .env-body{
+    position:absolute;inset:0;border-radius:12px;
+    background:linear-gradient(160deg,#ffe0ee,#ffb3d0);
+    border:2px solid rgba(255,255,255,.4);
+    overflow:hidden;
+  }
+  .env-flap{
+    position:absolute;top:0;left:0;right:0;height:120px;
+    clip-path:polygon(0 0,50% 100%,100% 0);
+    background:linear-gradient(160deg,#ff8fc1,#ff5fa0);
+    transform-origin:top center;
+    transform:rotateX(0deg);
+    transition:transform .7s cubic-bezier(.4,0,.2,1);
+    z-index:4;
+  }
+  .env-left{
+    position:absolute;bottom:0;left:0;width:50%;height:100%;
+    clip-path:polygon(0 0,100% 100%,0 100%);
+    background:rgba(255,100,160,.3);z-index:1;
+  }
+  .env-right{
+    position:absolute;bottom:0;right:0;width:50%;height:100%;
+    clip-path:polygon(0 100%,100% 0,100% 100%);
+    background:rgba(255,100,160,.25);z-index:1;
+  }
+  .carta-paper{
+    position:absolute;left:14px;right:14px;bottom:0;
+    height:190px;
+    background:#fff;color:#333;
+    border-radius:10px 10px 6px 6px;
+    padding:18px 20px 14px;
+    overflow-y:auto;
+    transform:translateY(60px);
+    transition:transform .7s cubic-bezier(.4,0,.2,1);
+    z-index:2;
+    box-shadow:0 -4px 20px rgba(0,0,0,.1);
+    font-size:.82rem;line-height:1.7;
+  }
+  .carta-paper h3{color:#ff2d87;font-size:.95rem;margin-bottom:10px;}
+  .carta-paper p{margin-bottom:8px;}
+  .envelope.aberto .env-flap{transform:rotateX(-180deg);}
+  .envelope.aberto .carta-paper{transform:translateY(-110px);}
+  .open-btn{
+    margin-top:4px;padding:.8rem 2.2rem;border:none;border-radius:50px;
+    background:#fff;color:#ff2d87;
+    font-family:'Poppins',sans-serif;font-size:.95rem;font-weight:700;
+    cursor:pointer;transition:.25s;box-shadow:0 6px 24px rgba(0,0,0,.1);
+  }
+  .open-btn:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.15);}
+
+  /* FOOTER */
+  .footer{text-align:center;padding:30px;opacity:.65;font-size:.82rem;position:relative;z-index:1;}
+
+  /* FLOATING HEARTS */
+  .fh{
+    position:fixed;pointer-events:none;font-size:1.4rem;
+    animation:flyHeart 1.2s ease-out forwards;z-index:999;
+  }
+  @keyframes flyHeart{
+    0%{opacity:1;transform:translateY(0) scale(1);}
+    100%{opacity:0;transform:translateY(-120px) scale(1.6);}
+  }
+</style>
+
+<div class="heloa-root">
+  <div class="particles" id="particles"></div>
+
+  <section class="hero">
+    <div class="hero-badge"><span class="dot"></span>Página especial</div>
+    <h1>HELOA</h1>
+    <p class="hero-sub">Uma pessoa determinada, dedicada aos esportes, com personalidade forte e uma presença que se destaca.</p>
+    <button class="cta-btn" id="enterBtn">Descobrir mais ↓</button>
+    <div class="scroll-hint">▼</div>
+  </section>
+
+  <main class="main" id="mainContent">
+
+    <div class="card">
+      <h2><span class="emoji">✦</span>Sobre Você</h2>
+      <div class="tags">
+        <span class="tag">🥋 Jiu-Jitsu</span>
+        <span class="tag">🥊 Muay Thai</span>
+        <span class="tag">♋ Câncer</span>
+        <span class="tag">🌸 Cor: Rosa</span>
+        <span class="tag">🤝 Amizade desde março 2025</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="emoji">💬</span>Mensagem do Dia</h2>
+      <button class="reveal-btn" id="msgBtn">Revelar mensagem</button>
+      <div class="msg-area" id="msgArea"></div>
+    </div>
+
+    <div class="card">
+      <h2><span class="emoji">💗</span>Interação</h2>
+      <div class="heart-wrap">
+        <button class="heart-btn" id="heartBtn" aria-label="Curtir">❤️</button>
+        <div class="heart-count" id="heartCount">0 curtidas</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="emoji">📅</span>Tempo de Amizade</h2>
+      <div class="counter-display">
+        <span class="counter-num" id="counterNum">0</span>
+        <span class="counter-label">dias de amizade</span>
+      </div>
+      <div class="counter-since">Desde 1 de março de 2025</div>
+    </div>
+
+  </main>
+
+  <section class="carta-section">
+    <div class="card">
+      <h2 style="text-align:center"><span class="emoji">💌</span>Carta Especial</h2>
+      <div class="env-wrap">
+        <div class="envelope" id="envelope" title="Clique para abrir a carta">
+          <div class="env-body">
+            <div class="env-flap"></div>
+            <div class="env-left"></div>
+            <div class="env-right"></div>
+            <div class="carta-paper">
+              <h3>Para Heloa ♡</h3>
+              <p>Desde que nos conhecemos, você mostrou ser uma pessoa forte, determinada e cheia de personalidade.</p>
+              <p>Sua dedicação nos treinos, sua forma de enxergar as coisas e sua energia tornam você alguém especial.</p>
+              <p>Que nunca faltem motivos para sorrir, conquistar seus objetivos e continuar evoluindo a cada dia.</p>
+              <p style="margin-top:12px;color:#ff2d87;font-weight:600;">Com carinho. 🌸</p>
+            </div>
+          </div>
+        </div>
+        <button class="open-btn" id="openBtn">Abrir Carta 💌</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">Desenvolvido especialmente para Heloa 🌸</footer>
+</div>
+
+<script>
+(function(){
+  // Particles
+  const pc = document.getElementById('particles');
+  for(let i=0;i<28;i++){
+    const d=document.createElement('div');
+    d.className='p';
+    const s=20+Math.random()*70;
+    d.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;bottom:${Math.random()*20-20}%;animation-duration:${10+Math.random()*16}s;animation-delay:${Math.random()*10}s;`;
+    pc.appendChild(d);
+  }
+
+  // Scroll CTA
+  document.getElementById('enterBtn').onclick=()=>{
+    document.getElementById('mainContent').scrollIntoView({behavior:'smooth'});
+  };
+
+  // Messages
+  const msgs=[
+    'Você é uma pessoa admirável. 🌟',
+    'Sua dedicação inspira quem está ao redor.',
+    'Continue evoluindo todos os dias. 💪',
+    'Sua presença faz diferença.',
+    'Seu esforço sempre gera resultados.',
+    'Você possui um grande potencial. ✨',
+    'Força e determinação definem quem você é.',
+    'É incrível ver até onde você chegou. 🥊'
+  ];
+  let lastMsg=-1;
+  document.getElementById('msgBtn').onclick=function(){
+    let idx;
+    do{idx=Math.floor(Math.random()*msgs.length);}while(idx===lastMsg);
+    lastMsg=idx;
+    const el=document.getElementById('msgArea');
+    el.style.opacity='0';
+    setTimeout(()=>{el.textContent=msgs[idx];el.classList.add('show');},200);
+  };
+
+  // Heart
+  let clicks=0;
+  document.getElementById('heartBtn').onclick=function(e){
+    clicks++;
+    document.getElementById('heartCount').textContent=clicks+' curtida'+(clicks!==1?'s':'');
+    this.classList.remove('pop');
+    void this.offsetWidth;
+    this.classList.add('pop');
+    // floating heart
+    const fh=document.createElement('div');
+    fh.className='fh';
+    fh.textContent='❤️';
+    fh.style.left=(e.clientX-12)+'px';
+    fh.style.top=(e.clientY-12)+'px';
+    document.body.appendChild(fh);
+    setTimeout(()=>fh.remove(),1300);
+  };
+
+  // Counter
+  const start=new Date('2025-03-01');
+  const days=Math.floor((new Date()-start)/86400000);
+  document.getElementById('counterNum').textContent=days;
+
+  // Envelope
+  const env=document.getElementById('envelope');
+  const btn=document.getElementById('openBtn');
+  let open=false;
+  function toggle(){
+    open=!open;
+    env.classList.toggle('aberto',open);
+    btn.textContent=open?'Fechar Carta ✕':'Abrir Carta 💌';
+  }
+  env.onclick=toggle;
+  btn.onclick=toggle;
+})();
+</script>
